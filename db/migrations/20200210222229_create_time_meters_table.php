@@ -12,6 +12,8 @@ class CreateTimeMetersTable extends AbstractMigration
             ->addColumn("id", "string")
             ->addColumn("user_id", "string")
             ->addColumn("name", "string")
+            ->addColumn("created_at", "datetime", ["default" => "CURRENT_TIMESTAMP"])
+            ->addColumn("updated_at", "datetime", ["null" => true, "update" => "CURRENT_TIMESTAMP"])
             ->create();
     }
 }

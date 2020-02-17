@@ -5,6 +5,7 @@ use App\Accounts\Http\Actions\RegisterAction;
 use App\Accounts\Http\Middleware\JWTAuthMiddleware;
 use App\TimeMeters\Http\Controllers\TimeMetersController;
 use Slim\Interfaces\RouteCollectorProxyInterface;
+use App\Plans\Http\Controllers\PlansController;
 
 $app->group("/v1", function (RouteCollectorProxyInterface $group) {
     $group->post("/auth/login", AuthAction::class);
@@ -12,5 +13,6 @@ $app->group("/v1", function (RouteCollectorProxyInterface $group) {
 
     $group->group("/", function (RouteCollectorProxyInterface $group) {
         $group->post("time-meters", TimeMetersController::class . ':store');
+        $group->post("plans", PlansController::class . ':store');
     })->addmiddleware(new JWTAuthMiddleware());
 });

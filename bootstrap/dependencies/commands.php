@@ -8,6 +8,8 @@ use App\TimeMeters\Application\Create\CreateTimeMeterCommandHandler;
 use App\Accounts\Application\Auth\SetAccessTokenOnUserCommand;
 use App\Accounts\Application\Create\CreateUserCommand;
 use App\Accounts\Application\Create\CreateUserCommandHandler;
+use App\Plans\Application\Create\CreatePlanCommand;
+use App\Plans\Application\Create\CreatePlanCommandHandler;
 
 $container->set(
     CreateTimeMeterCommand::class,
@@ -27,4 +29,9 @@ $container->set(
 $container->set(
     CreateUserCommand::class,
     DI\autowire(CreateUserCommandHandler::class),
+);
+
+$container->set(
+    CreatePlanCommand::class,
+    DI\autowire(CreatePlanCommandHandler::class),
 );

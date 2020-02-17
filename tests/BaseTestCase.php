@@ -16,6 +16,7 @@ use App\Shared\Infrastructure\Bus\QueryBus;
 use App\Accounts\Application\Find\FindUserByEmailQuery;
 use App\Shared\Http\Middleware\ExceptionMiddleware;
 use App\Shared\Http\Middleware\JsonBodyParserMiddleware;
+use Doctrine\DBAL\Connection;
 
 class BaseTestCase extends TestCase
 {
@@ -23,7 +24,9 @@ class BaseTestCase extends TestCase
     protected Container $container;
     protected CommandBus $commandBus;
     protected QueryBus $queryBus;
+    protected Connection $connection;
     protected string $jwtToken;
+    protected string $userId;
 
     public function setUp(): void
     {
@@ -78,6 +81,7 @@ class BaseTestCase extends TestCase
         $this->container  = $container;
         $this->commandBus = new CommandBus($this->container);
         $this->queryBus = new QueryBus($this->container);
+        $this->connection = $this->container->get(Connection::class);
     }
 
     protected function actingAs(string $email): void
@@ -85,6 +89,7 @@ class BaseTestCase extends TestCase
         $user = $this->queryBus->handle(new FindUserByEmailQuery($email));
 
         $this->jwtToken = $this->container->get(JWTEncoder::class)->fromUser($user);
+        $this->userId   = $user->id();
     }
 
     protected function createRequest(

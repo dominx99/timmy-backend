@@ -6,9 +6,14 @@ final class SuccessResponse extends JsonResponse
 {
     public static function create(array $data = [], int $status = 200): self
     {
-        return parent::create([
+        $params = [
             "status" => "success",
-            "data"   => $data,
-        ], $status);
+        ];
+
+        if (! empty($data)) {
+            $params = array_merge($params, ["data" => $data]);
+        }
+
+        return parent::create($params, $status);
     }
 }
