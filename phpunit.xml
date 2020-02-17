@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phpunit bootstrap="./vendor/autoload.php"
+         colors="true"
+         verbose="true"
+         stopOnFailure="true">
+    <php>
+        <env name="DB_NAME" value="timmy_test"/>
+    </php>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
+    <testsuites>
+        <testsuite name="Test suite">
+            <directory>./tests</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
