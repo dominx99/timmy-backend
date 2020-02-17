@@ -16,4 +16,4 @@ $container->set(AuthGuardResolverContract::class, DI\autowire(AuthGuardResolver:
 
 require 'dependencies/database.php';
 require 'dependencies/commands.php';
-require 'dependencies/query.php';
+require 'dependencies/queries.php';
