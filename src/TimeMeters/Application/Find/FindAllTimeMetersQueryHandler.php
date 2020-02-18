@@ -34,7 +34,7 @@ final class FindAllTimeMetersQueryHandler implements QueryHandler
             $qb->getParameters()
         );
 
-        if (! $timeMeters) {
+        if ($timeMeters === false) {
             throw new BusinessException("Could not fetch time meters.");
         }
 

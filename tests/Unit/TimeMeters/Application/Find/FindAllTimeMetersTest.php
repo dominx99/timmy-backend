@@ -115,7 +115,7 @@ final class FindAllTimeMetersTest extends BaseTestCase
         $connection
             ->expects($this->once())
             ->method("fetchAll")
-            ->willReturn(0);
+            ->willReturn(false);
 
         $this->container->set(Connection::class, $connection);
 
