@@ -46,6 +46,10 @@ final class FindAllTimeMetersTest extends BaseTestCase
             ->willReturn($queryBuilder);
 
         $queryBuilder
+            ->method("orderBy")
+            ->willReturn($queryBuilder);
+
+        $queryBuilder
             ->expects($this->once())
             ->method("setParameter")
             ->with("userId", $userId)
@@ -99,6 +103,10 @@ final class FindAllTimeMetersTest extends BaseTestCase
 
         $queryBuilder
             ->method("where")
+            ->willReturn($queryBuilder);
+
+        $queryBuilder
+            ->method("orderBy")
             ->willReturn($queryBuilder);
 
         $queryBuilder

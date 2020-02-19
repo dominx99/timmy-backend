@@ -12,6 +12,7 @@ $app->group("/v1", function (RouteCollectorProxyInterface $group) {
     $group->post("/auth/register", RegisterAction::class);
 
     $group->group("/", function (RouteCollectorProxyInterface $group) {
+        $group->get("time-meters", TimeMetersController::class . ':index');
         $group->post("time-meters", TimeMetersController::class . ':store');
         $group->post("plans", PlansController::class . ':store');
     })->addmiddleware(new JWTAuthMiddleware());

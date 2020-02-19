@@ -38,4 +38,13 @@ final class TimeMeterView
     {
         return $this->name;
     }
+
+    public function toArray(): array
+    {
+        return [
+            "id"     => $this->id(),
+            "userId" => $this->userId(),
+            "name"   => $this->name(),
+        ];
+    }
 }

@@ -31,8 +31,10 @@ final class PlansControllerTest extends BaseTestCase
         ]);
 
         $response = $this->app->handle($request);
+        $body = json_decode((string) $response->getBody(), true);
 
         $this->assertSame(200, $response->getStatusCode());
-        $this->assertSame(["status" => "success"], json_decode((string) $response->getBody(), true));
+        $this->arrayHasKey("status", $body);
+        $this->assertSame("success", $body["status"]);
     }
 }

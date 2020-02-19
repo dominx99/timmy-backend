@@ -27,6 +27,7 @@ final class FindAllTimeMetersQueryHandler implements QueryHandler
             ->select("*")
             ->from("time_meters", "tm")
             ->where("tm.user_id = :userId")
+            ->orderBy("created_at")
             ->setParameter("userId", $query->userId());
 
         $timeMeters = $this->connection->fetchAll(
