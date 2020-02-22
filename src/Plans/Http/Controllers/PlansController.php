@@ -30,12 +30,12 @@ final class PlansController
 
         $this->commandBus->handle(new CreatePlanCommand(
             (string) Uuid::uuid4(),
-            $body["time_meter_id"],
+            $body["timeMeterId"],
             $request->getAttribute("decodedToken")->id(),
-            $body["start_date"],
-            $body["end_date"],
-            $body["min_time"] ?? null,
-            $body["max_time"] ?? null,
+            $body["startDate"],
+            $body["endDate"],
+            $body["minTime"] ?? null,
+            $body["maxTime"] ?? null,
         ));
 
         return SuccessResponse::create();

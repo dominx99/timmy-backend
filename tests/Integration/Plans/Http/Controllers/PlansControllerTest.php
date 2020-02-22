@@ -23,11 +23,11 @@ final class PlansControllerTest extends BaseTestCase
         $this->commandBus->handle(new CreateTimeMeterCommand($timeMeterId, $this->userId, "Work"));
 
         $request = $this->createRequest("POST", "v1/plans", [
-            "time_meter_id" => $timeMeterId,
-            "start_date"    => "2020-02-18 00:00:00",
-            "end_date"      => "2020-02-19 00:00:00",
-            "min_time"      => 3000,
-            "max_time"      => 4800,
+            "timeMeterId" => $timeMeterId,
+            "startDate"   => "2020-02-18 00:00:00",
+            "endDate"     => "2020-02-19 00:00:00",
+            "minTime"     => 3000,
+            "maxTime"     => 4800,
         ]);
 
         $response = $this->app->handle($request);

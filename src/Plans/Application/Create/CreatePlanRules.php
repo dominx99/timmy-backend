@@ -10,9 +10,9 @@ final class CreatePlanRules implements Rules
     public function rules(): array
     {
         return [
-            "time_meter_id" => v::notEmpty(),
-            "start_date"    => v::notEmpty(),
-            "end_date"      => v::notEmpty(),
+            "timeMeterId" => v::notEmpty(),
+            "startDate"   => v::notEmpty(),
+            "endDate"     => v::notEmpty(),
         ];
     }
 }
