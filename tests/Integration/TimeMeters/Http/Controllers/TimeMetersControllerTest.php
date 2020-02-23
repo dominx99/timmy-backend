@@ -66,7 +66,7 @@ final class TimeMetersControllerTest extends BaseTestCase
             ],
         ];
 
-        foreach($timeMeters as $timeMeter) {
+        foreach ($timeMeters as $timeMeter) {
             $this->commandBus->handle(new CreateTimeMeterCommand(
                 $timeMeter["id"],
                 $timeMeter["userId"],

@@ -55,7 +55,7 @@ final class TimeMetersController
 
         return SuccessResponse::create(
             $timeMeters->map(
-                fn($timeMeter) => $timeMeter->toArray(),
+                fn ($timeMeter) => $timeMeter->toArray(),
             )->toArray(),
         );
     }

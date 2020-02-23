@@ -32,6 +32,6 @@ final class FindPlansByDateAction
             $body["date"],
         ));
 
-        return SuccessResponse::create($plans->map(fn($plan) => $plan->toArray())->toArray());
+        return SuccessResponse::create($plans->map(fn ($plan) => $plan->toArray())->toArray());
     }
 }

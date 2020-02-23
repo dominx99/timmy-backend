@@ -39,7 +39,7 @@ final class FindAllTimeMetersQueryHandler implements QueryHandler
             throw new BusinessException("Could not fetch time meters.");
         }
 
-        $timeMeters = array_map(fn($timeMeter) => TimeMeterView::create($timeMeter), $timeMeters);
+        $timeMeters = array_map(fn ($timeMeter) => TimeMeterView::create($timeMeter), $timeMeters);
 
         return new TimeMeters($timeMeters);
     }

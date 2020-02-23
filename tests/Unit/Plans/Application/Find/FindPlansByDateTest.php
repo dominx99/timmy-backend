@@ -102,7 +102,7 @@ final class FindPlansByDateTest extends BaseTestCase
         $plans = $this->queryBus->handle(new FindPlansByDateQuery($userId, $date));
 
         $expectedPlans = new Plans(array_map(
-            fn($plan) => PlanView::create($plan),
+            fn ($plan) => PlanView::create($plan),
             $expectedPlans
         ));
 

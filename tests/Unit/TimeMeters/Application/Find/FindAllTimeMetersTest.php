@@ -72,7 +72,7 @@ final class FindAllTimeMetersTest extends BaseTestCase
         $timeMeters = $this->queryBus->handle(new FindAllTimeMetersQuery($userId));
 
         $expectedTimeMeters = new TimeMeters(array_map(
-            fn($timeMeter) => TimeMeterView::create($timeMeter),
+            fn ($timeMeter) => TimeMeterView::create($timeMeter),
             $expectedTimeMeters
         ));
 
