@@ -11,7 +11,7 @@ use App\Plans\Application\Create\CreatePlanCommand;
 final class CreatePlanTest extends BaseTestCase
 {
     /** @test */
-    public function that_creates_time_meter()
+    public function that_creates_plan()
     {
         $planId      = (string) Uuid::uuid4();
         $timeMeterId = (string) Uuid::uuid4();

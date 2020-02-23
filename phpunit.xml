@@ -13,6 +13,9 @@
     </filter>
     <testsuites>
         <testsuite name="Test suite">
+            <directory>./tests/Unit/Plans/Application/Create/CreatePlanTest.php</directory>
+            <directory>./tests/Unit/Plans/Application/Find/FindPlansByDateTest.php</directory>
+            <directory>./tests/Unit/Plans/Http/Actions/FindPlansByDateActionTest.php</directory>
             <directory>./tests</directory>
         </testsuite>
     </testsuites>

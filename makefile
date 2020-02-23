@@ -27,8 +27,8 @@ tt:
 	@docker-compose -f $(compose_file) exec $(php_service) sh -c "composer test $(CMD)"
 
 ttc:
-	@docker-compose -f $(compose_file) exec $(php_service) sh -c "composer test -- --coverage-html .coverage"
+	@docker-compose -f $(compose_file) exec $(php_service) sh -c "composer test -- --coverage-html .coverage $(CMD)"
 	@chromium ".coverage/index.html"
 
 ttcn:
-	@docker-compose -f $(compose_file) exec $(php_service) sh -c "composer test -- --coverage-html .coverage"
+	@docker-compose -f $(compose_file) exec $(php_service) sh -c "composer test -- --coverage-html .coverage $(CMD)"

@@ -20,8 +20,8 @@ final class CreatePlanCommand implements Command
         string $userId,
         string $startDate,
         string $endDate,
-        ?int $minTime,
-        ?int $maxTime
+        ?int $minTime = null,
+        ?int $maxTime = null
     ) {
         $this->planId = $planId;
         $this->timeMeterId = $timeMeterId;

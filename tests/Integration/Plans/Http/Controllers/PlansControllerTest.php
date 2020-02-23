@@ -3,7 +3,6 @@
 namespace Tests\Integration\TimeMeters\Http\Controllers;
 
 use App\TimeMeters\Application\Create\CreateTimeMeterCommand;
-use Doctrine\DBAL\Connection;
 use Tests\BaseTestCase;
 use Tests\DatabaseMigrations;
 use Tests\DatabaseSeeds;

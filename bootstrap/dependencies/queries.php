@@ -2,6 +2,8 @@
 
 use App\Accounts\Application\Find\FindUserByEmailQuery;
 use App\Accounts\Application\Find\FindUserByEmailQueryHandler;
+use App\Plans\Application\Find\FindPlansByDateQuery;
+use App\Plans\Application\Find\FindPlansByDateQueryHandler;
 use App\TimeMeters\Application\Find\FindAllTimeMetersQuery;
 use App\TimeMeters\Application\Find\FindAllTimeMetersQueryHandler;
 
@@ -13,4 +15,9 @@ $container->set(
 $container->set(
     FindAllTimeMetersQuery::class,
     DI\autowire(FindAllTimeMetersQueryHandler::class),
+);
+
+$container->set(
+    FindPlansByDateQuery::class,
+    DI\autowire(FindPlansByDateQueryHandler::class),
 );

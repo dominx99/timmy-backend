@@ -73,4 +73,14 @@ final class CollectionTest extends BaseTestCase
 
         $this->assertSame($expectedTasks, $newTasks->toArray());
     }
+
+    /** @test */
+    public function that_count_method_works()
+    {
+        $collection = new DummyCollection(["banana", "apple", "strawberry"]);
+        $this->assertSame(3, $collection->count());
+
+        $collection = new DummyCollection();
+        $this->assertSame(0, $collection->count());
+    }
 }

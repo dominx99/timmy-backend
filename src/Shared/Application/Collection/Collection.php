@@ -21,6 +21,11 @@ abstract class Collection
         return empty($this->items);
     }
 
+    public function count(): int
+    {
+        return count($this->items);
+    }
+
     public function map(callable $callback): self
     {
         return new static(array_map($callback, $this->items));
