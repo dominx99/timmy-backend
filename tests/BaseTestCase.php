@@ -24,7 +24,6 @@ class BaseTestCase extends TestCase
     protected Container $container;
     protected CommandBus $commandBus;
     protected QueryBus $queryBus;
-    protected Connection $connection;
     protected string $jwtToken;
     protected string $userId;
 
@@ -81,7 +80,6 @@ class BaseTestCase extends TestCase
         $this->container  = $container;
         $this->commandBus = new CommandBus($this->container);
         $this->queryBus = new QueryBus($this->container);
-        $this->connection = $this->container->get(Connection::class);
     }
 
     protected function actingAs(string $email): void

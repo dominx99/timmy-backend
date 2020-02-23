@@ -10,7 +10,6 @@ use App\Plans\Application\Find\FindPlansByDateQuery;
 use App\Plans\Domain\PlanView;
 use App\Plans\Domain\Plans;
 use App\Shared\Exceptions\BusinessException;
-use App\TimeMeters\Application\Find\FindAllTimeMetersQuery;
 
 final class FindPlansByDateTest extends BaseTestCase
 {

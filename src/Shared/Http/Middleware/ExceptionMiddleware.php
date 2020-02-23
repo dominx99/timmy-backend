@@ -26,11 +26,11 @@ final class ExceptionMiddleware implements MiddlewareInterface
         } catch (BusinessException $e) {
             return JsonResponse::create([
                 'error' => $e->getMessage(),
-            ], $e->getCode ? $e->getCode() : StatusCodeInterface::STATUS_BAD_REQUEST);
+            ], $e->getCode() ? $e->getCode() : StatusCodeInterface::STATUS_BAD_REQUEST);
         } catch (ValidationException $e) {
             return JsonResponse::create([
                 'errors' => $e->messages(),
-            ], $e->getCode ? $e->getCode() : StatusCodeInterface::STATUS_UNPROCESSABLE_ENTITY);
+            ], $e->getCode() ? $e->getCode() : StatusCodeInterface::STATUS_UNPROCESSABLE_ENTITY);
         }
 
         return $response;

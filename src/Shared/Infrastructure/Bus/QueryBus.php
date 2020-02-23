@@ -2,6 +2,7 @@
 
 namespace App\Shared\Infrastructure\Bus;
 
+use App\Plans\Application\Exist\PlanExistsInPeriodForTimeMeterQuery;
 use App\Shared\Contracts\QueryHandler;
 use App\Shared\Exceptions\SystemException;
 use DI\Container;
