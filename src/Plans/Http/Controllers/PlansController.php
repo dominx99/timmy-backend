@@ -58,8 +58,8 @@ final class PlansController
             $request->getAttribute("decodedToken")->id(),
             $body["startDate"],
             $body["endDate"],
-            $body["minTime"] ?? null,
-            $body["maxTime"] ?? null,
+            ! empty($body["minTime"]) ? $body["minTime"] : null,
+            ! empty($body["maxTime"]) ? $body["maxTime"] : null,
         ));
 
         return SuccessResponse::create();
