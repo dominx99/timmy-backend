@@ -49,34 +49,16 @@ final class FindPlansByDateTest extends BaseTestCase
 
         $queryBuilder = $this->createMock(QueryBuilder::class);
 
-        $queryBuilder
-            ->method("select")
-            ->willReturn($queryBuilder);
+        $queryBuilder->method("select")->willReturn($queryBuilder);
+        $queryBuilder->method("from")->willReturn($queryBuilder);
+        $queryBuilder->method("where")->willReturn($queryBuilder);
+        $queryBuilder->method("join")->willReturn($queryBuilder);
+        $queryBuilder->expects($this->once())->method("having")->willReturn($queryBuilder);
+        $queryBuilder->expects($this->exactly(2))->method("andHaving")->willReturn($queryBuilder);
+        $queryBuilder->method("orderBy")->willReturn($queryBuilder);
 
         $queryBuilder
-            ->method("from")
-            ->willReturn($queryBuilder);
-
-        $queryBuilder
-            ->method("join")
-            ->willReturn($queryBuilder);
-
-        $queryBuilder
-            ->expects($this->once())
-            ->method("having")
-            ->willReturn($queryBuilder);
-
-        $queryBuilder
-            ->expects($this->exactly(2))
-            ->method("andHaving")
-            ->willReturn($queryBuilder);
-
-        $queryBuilder
-            ->method("orderBy")
-            ->willReturn($queryBuilder);
-
-        $queryBuilder
-            ->expects($this->exactly(2))
+            ->expects($this->exactly(4))
             ->method("setParameter")
             ->withConsecutive(
                 ["userId", $userId],
@@ -84,17 +66,17 @@ final class FindPlansByDateTest extends BaseTestCase
             )
             ->willReturn($queryBuilder);
 
-        $queryBuilder
-            ->method("getParameters")
-            ->willReturn([]);
+        $queryBuilder->method("getParameters")->willReturn([]);
 
         $connection = $this->createMock(Connection::class);
         $connection->method("createQueryBuilder")->willReturn($queryBuilder);
 
         $connection
-            ->expects($this->once())
+            ->expects($this->exactly(3))
             ->method("fetchAll")
-            ->willReturn($expectedPlans);
+            ->willReturnOnConsecutiveCalls(
+                $expectedPlans, [], []
+            );
 
         $this->container->set(Connection::class, $connection);
 

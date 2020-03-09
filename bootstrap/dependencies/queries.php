@@ -2,6 +2,8 @@
 
 use App\Accounts\Application\Find\FindUserByEmailQuery;
 use App\Accounts\Application\Find\FindUserByEmailQueryHandler;
+use App\Measurements\Application\Find\FindMeasurementsByPlanQuery;
+use App\Measurements\Application\Find\FindMeasurementsByPlanQueryHandler;
 use App\Plans\Application\Exist\PlanExistsInPeriodForTimeMeterQuery;
 use App\Plans\Application\Find\FindPlansByDateQuery;
 use App\Plans\Application\Find\FindPlansByDateQueryHandler;
@@ -34,4 +36,9 @@ $container->set(
 $container->set(
     IsPlanStartedQuery::class,
     DI\autowire(IsPlanStartedQueryHandler::class),
+);
+
+$container->set(
+    FindMeasurementsByPlanQuery::class,
+    DI\autowire(FindMeasurementsByPlanQueryHandler::class),
 );

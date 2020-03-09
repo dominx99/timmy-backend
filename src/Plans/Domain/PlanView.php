@@ -3,6 +3,7 @@
 namespace App\Plans\Domain;
 
 use App\TimeMeters\Domain\TimeMeterView;
+use App\Measurements\Domain\Measurements;
 
 final class PlanView
 {
@@ -14,6 +15,7 @@ final class PlanView
     private int $minTime;
     private int $maxTime;
     private TimeMeterView $timeMeter;
+    private Measurements $measurements;
 
     private function __construct(
         string $id,
@@ -24,13 +26,14 @@ final class PlanView
         int $minTime,
         int $maxTime
     ) {
-        $this->id          = $id;
-        $this->userId      = $userId;
-        $this->timeMeterId = $timeMeterId;
-        $this->startDate   = $startDate;
-        $this->endDate     = $endDate;
-        $this->minTime     = $minTime;
-        $this->maxTime     = $maxTime;
+        $this->id           = $id;
+        $this->userId       = $userId;
+        $this->timeMeterId  = $timeMeterId;
+        $this->startDate    = $startDate;
+        $this->endDate      = $endDate;
+        $this->minTime      = $minTime;
+        $this->maxTime      = $maxTime;
+        $this->measurements = new Measurements();
     }
 
     public static function create(array $data): self
@@ -49,6 +52,11 @@ final class PlanView
     public function setTimeMeter(TimeMeterView $timeMeter): void
     {
         $this->timeMeter = $timeMeter;
+    }
+
+    public function setMeasurements(Measurements $measurements): void
+    {
+        $this->measurements = $measurements;
     }
 
     public function id(): string
@@ -89,14 +97,15 @@ final class PlanView
     public function toArray(): array
     {
         return [
-            "id"          => $this->id(),
-            "userId"      => $this->userId(),
-            "timeMeterId" => $this->timeMeterId(),
-            "startDate"   => $this->startDate(),
-            "endDate"     => $this->endDate(),
-            "minTime"     => $this->minTime(),
-            "maxTime"     => $this->maxTime(),
-            "timeMeter"   => $this->timeMeter->toArray(),
+            "id"           => $this->id(),
+            "userId"       => $this->userId(),
+            "timeMeterId"  => $this->timeMeterId(),
+            "startDate"    => $this->startDate(),
+            "endDate"      => $this->endDate(),
+            "minTime"      => $this->minTime(),
+            "maxTime"      => $this->maxTime(),
+            "timeMeter"    => $this->timeMeter->toArray(),
+            "measurements" => $this->measurements->map(fn($m) => $m->toArray())->toArray(),
         ];
     }
 }
