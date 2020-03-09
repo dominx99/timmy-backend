@@ -8,6 +8,8 @@ use App\TimeMeters\Application\Create\CreateTimeMeterCommandHandler;
 use App\Accounts\Application\Auth\SetAccessTokenOnUserCommand;
 use App\Accounts\Application\Create\CreateUserCommand;
 use App\Accounts\Application\Create\CreateUserCommandHandler;
+use App\Measurements\Application\Create\CreateMeasurementForPlanCommandHandler;
+use App\Measurements\Application\Create\CreateMeasurementForPlanCommand;
 use App\Plans\Application\Create\CreatePlanCommand;
 use App\Plans\Application\Create\CreatePlanCommandHandler;
 
@@ -34,4 +36,9 @@ $container->set(
 $container->set(
     CreatePlanCommand::class,
     DI\autowire(CreatePlanCommandHandler::class),
+);
+
+$container->set(
+    CreateMeasurementForPlanCommand::class,
+    DI\autowire(CreateMeasurementForPlanCommandHandler::class),
 );

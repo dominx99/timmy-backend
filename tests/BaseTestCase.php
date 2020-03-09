@@ -16,7 +16,6 @@ use App\Shared\Infrastructure\Bus\QueryBus;
 use App\Accounts\Application\Find\FindUserByEmailQuery;
 use App\Shared\Http\Middleware\ExceptionMiddleware;
 use App\Shared\Http\Middleware\JsonBodyParserMiddleware;
-use Doctrine\DBAL\Connection;
 
 class BaseTestCase extends TestCase
 {
