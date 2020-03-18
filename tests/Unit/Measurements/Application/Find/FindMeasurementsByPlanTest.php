@@ -9,6 +9,8 @@ use Doctrine\DBAL\Connection;
 use App\Measurements\Domain\Measurements;
 use App\Measurements\Domain\MeasurementView;
 use App\Measurements\Application\Find\FindMeasurementsByPlanQuery;
+use App\Shared\Contracts\ErrorMessageInterface;
+use App\Shared\Exceptions\BusinessException;
 
 final class FindMeasurementsByPlanTest extends BaseTestCase
 {
@@ -73,9 +75,45 @@ final class FindMeasurementsByPlanTest extends BaseTestCase
         $measurements = $measurements->toArray();
 
         foreach ($expectedMeasurements->toArray() as $key => $expectedMeasurement) {
-            $this->assertSame($expectedMeasurement->id(), $measurements[$key]->id());
-            $this->assertSame($expectedMeasurement->planId(), $measurements[$key]->planId());
-            $this->assertSame($expectedMeasurement->status(), $measurements[$key]->status());
+            $this->assertSame($expectedMeasurement->toArray(), $measurements[$key]->toArray());
         }
+    }
+
+    /** @test */
+    public function that_throws_expection_on_fail()
+    {
+        $this->expectException(BusinessException::class);
+        $this->expectExceptionMessage(ErrorMessageInterface::MEASUREMENTS_NOT_FOUND);
+
+        $planId = (string) Uuid::uuid4();
+
+        $queryBuilder = $this->createMock(QueryBuilder::class);
+
+        $queryBuilder->method("select")->willReturn($queryBuilder);
+        $queryBuilder->method("from")->willReturn($queryBuilder);
+        $queryBuilder->method("where")->willReturn($queryBuilder);
+        $queryBuilder->method("orderBy")->willReturn($queryBuilder);
+
+        $queryBuilder
+            ->expects($this->once())
+            ->method("setParameter")
+            ->with("planId", $planId)
+            ->willReturn($queryBuilder);
+
+        $queryBuilder
+            ->method("getParameters")
+            ->willReturn([]);
+
+        $connection = $this->createMock(Connection::class);
+        $connection->method("createQueryBuilder")->willReturn($queryBuilder);
+
+        $connection
+            ->expects($this->once())
+            ->method("fetchAll")
+            ->willReturn(false);
+
+        $this->container->set(Connection::class, $connection);
+
+        $this->queryBus->handle(new FindMeasurementsByPlanQuery($planId));
     }
 }

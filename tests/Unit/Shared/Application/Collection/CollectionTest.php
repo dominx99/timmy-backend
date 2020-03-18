@@ -83,4 +83,40 @@ final class CollectionTest extends BaseTestCase
         $collection = new DummyCollection();
         $this->assertSame(0, $collection->count());
     }
+
+    /** @test */
+    public function that_find_method_works()
+    {
+        $collection = new DummyCollection(["banana", "apple", "orange"]);
+
+        $item = $collection->find(fn(string $item) => $item === "orange");
+
+        $this->assertSame("orange", $item);
+
+        $collection = new DummyCollection([
+            [
+                "name" => "David",
+                "age"  => 13,
+            ],
+            [
+                "name" => "Coronavirus",
+                "age"  => 1,
+            ],
+            [
+                "name" => "Dominic",
+                "age"  => 20,
+            ]
+        ]);
+
+        $item = $collection->find(fn($item) => $item["name"] === "David");
+
+        $this->assertSame([
+            "name" => "David",
+            "age"  => 13,
+        ], $item);
+
+        $collection = new DummyCollection();
+        $item = $collection->find(fn($item) => $item["a"] === "b");
+        $this->assertSame(null, $item);
+    }
 }

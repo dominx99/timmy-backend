@@ -35,4 +35,18 @@ abstract class Collection
     {
         return $this->items;
     }
+
+    /**
+        @return mixed
+     */
+    public function find(callable $callback)
+    {
+        $items = array_values(array_filter($this->items, $callback));
+
+        if (isset($items[0])) {
+            return $items[0];
+        }
+
+        return null;
+    }
 }

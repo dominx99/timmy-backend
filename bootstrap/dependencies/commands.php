@@ -10,6 +10,8 @@ use App\Accounts\Application\Create\CreateUserCommand;
 use App\Accounts\Application\Create\CreateUserCommandHandler;
 use App\Measurements\Application\Create\CreateMeasurementForPlanCommandHandler;
 use App\Measurements\Application\Create\CreateMeasurementForPlanCommand;
+use App\Measurements\Application\Update\StopMeasurementCommand;
+use App\Measurements\Application\Update\StopMeasurementCommandHandler;
 use App\Plans\Application\Create\CreatePlanCommand;
 use App\Plans\Application\Create\CreatePlanCommandHandler;
 
@@ -41,4 +43,9 @@ $container->set(
 $container->set(
     CreateMeasurementForPlanCommand::class,
     DI\autowire(CreateMeasurementForPlanCommandHandler::class),
+);
+
+$container->set(
+    StopMeasurementCommand::class,
+    DI\autowire(StopMeasurementCommandHandler::class),
 );

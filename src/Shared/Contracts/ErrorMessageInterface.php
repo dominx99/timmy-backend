@@ -6,4 +6,7 @@ interface ErrorMessageInterface
 {
     const PLAN_IN_EXISTING_PERIOD = "Cannot create plan in existing period.";
     const PLAN_ALREADY_STARTED = "Plan already started.";
+    const PLAN_IS_NOT_STARTED = "Plan is not started.";
+
+    const MEASUREMENTS_NOT_FOUND = "Could not fetch measurements.";
 }

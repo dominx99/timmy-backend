@@ -7,6 +7,7 @@ use Doctrine\DBAL\Connection;
 use App\Measurements\Domain\Measurements;
 use App\Shared\Exceptions\BusinessException;
 use App\Measurements\Domain\MeasurementView;
+use App\Shared\Contracts\ErrorMessageInterface;
 
 final class FindMeasurementsByPlanQueryHandler implements QueryHandler
 {
@@ -36,7 +37,7 @@ final class FindMeasurementsByPlanQueryHandler implements QueryHandler
         );
 
         if ($measurements === false) {
-            throw new BusinessException("Could not fetch measurements.");
+            throw new BusinessException(ErrorMessageInterface::MEASUREMENTS_NOT_FOUND);
         }
 
         return new Measurements(array_map(function ($row) {
