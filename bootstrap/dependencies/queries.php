@@ -12,6 +12,8 @@ use App\TimeMeters\Application\Find\FindAllTimeMetersQueryHandler;
 use App\Plans\Application\Exist\PlanExistsInPeriodForTimeMeterQueryHandler;
 use App\Plans\Application\Find\IsPlanStartedQuery;
 use App\Plans\Application\Find\IsPlanStartedQueryHandler;
+use App\Shared\Application\Calendar\GetActualTimeQuery;
+use App\Shared\Application\Calendar\GetActualTimeQueryHandler;
 
 $container->set(
     FindUserByEmailQuery::class,
@@ -41,4 +43,9 @@ $container->set(
 $container->set(
     FindMeasurementsByPlanQuery::class,
     DI\autowire(FindMeasurementsByPlanQueryHandler::class),
+);
+
+$container->set(
+    GetActualTimeQuery::class,
+    DI\autowire(GetActualTimeQueryHandler::class),
 );

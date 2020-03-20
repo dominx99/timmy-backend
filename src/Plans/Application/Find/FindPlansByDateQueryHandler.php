@@ -29,7 +29,7 @@ final class FindPlansByDateQueryHandler implements QueryHandler
             ->createQueryBuilder();
 
         $qb
-            ->select("*")
+            ->select("*", "p.id as id")
             ->from("plans", "p")
             ->join("p", "time_meters", "tm", "p.time_meter_id = tm.id")
             ->having("p.user_id = :userId")

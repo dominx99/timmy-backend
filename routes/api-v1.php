@@ -9,6 +9,7 @@ use App\Plans\Http\Actions\FindPlansByDateAction;
 use App\TimeMeters\Http\Controllers\TimeMetersController;
 use Slim\Interfaces\RouteCollectorProxyInterface;
 use App\Plans\Http\Controllers\PlansController;
+use App\Shared\Http\Actions\GetActualTimeAction;
 
 $app->group("/v1", function (RouteCollectorProxyInterface $group) {
     $group->post("/auth/login", AuthAction::class);
@@ -22,5 +23,7 @@ $app->group("/v1", function (RouteCollectorProxyInterface $group) {
 
         $group->post("measurements/{planId}/start", StartMeasurementAction::class);
         $group->post("measurements/{planId}/stop", StopMeasurementAction::class);
+
+        $group->get("time/now", GetActualTimeAction::class);
     })->addmiddleware(new JWTAuthMiddleware());
 });

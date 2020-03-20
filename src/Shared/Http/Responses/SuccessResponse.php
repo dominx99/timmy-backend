@@ -2,11 +2,16 @@
 
 namespace App\Shared\Http\Responses;
 
-final class SuccessResponse extends JsonResponse
+final class SuccessResponse
 {
-    public static function create(array $data = [], int $status = 200): self
+    /**
+        @param string|array $data
+        @param int $status
+        @return self
+     */
+    public static function create($data = [], int $status = 200): JsonResponse
     {
-        return parent::create([
+        return JsonResponse::create([
             "status" => "success",
             "data"   => $data,
         ], $status);
