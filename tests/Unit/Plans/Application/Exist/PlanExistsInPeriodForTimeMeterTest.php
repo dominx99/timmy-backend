@@ -33,13 +33,8 @@ final class PlanExistsInPeriodForTimeMeterTest extends BaseTestCase
         $this->expressionBuilder = $this->createMock(ExpressionBuilder::class);
         $this->statement = $this->createMock(ResultStatement::class);
 
-        $this->queryBuilder
-            ->method("select")
-            ->willReturn($this->queryBuilder);
-
-        $this->queryBuilder
-            ->method("from")
-            ->willReturn($this->queryBuilder);
+        $this->queryBuilder->method("select")->willReturn($this->queryBuilder);
+        $this->queryBuilder->method("from")->willReturn($this->queryBuilder);
 
         $this->queryBuilder
             ->expects($this->once())

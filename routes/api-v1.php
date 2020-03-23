@@ -11,6 +11,7 @@ use App\TimeMeters\Http\Controllers\TimeMetersController;
 use Slim\Interfaces\RouteCollectorProxyInterface;
 use App\Plans\Http\Controllers\PlansController;
 use App\Shared\Http\Actions\GetActualTimeAction;
+use App\Plans\Http\Actions\FindPlansByPeriodAction;
 
 $app->group("/v1", function (RouteCollectorProxyInterface $group) {
     $group->post("/auth/login", AuthAction::class);
@@ -21,6 +22,7 @@ $app->group("/v1", function (RouteCollectorProxyInterface $group) {
         $group->post("time-meters", TimeMetersController::class . ':store');
         $group->post("plans", PlansController::class . ':store');
         $group->get("plans/by/date", FindPlansByDateAction::class);
+        $group->get("plans/by/period", FindPlansByPeriodAction::class);
         $group->get("plans/{planId}/measurements", FindMeasurementsByPlanAction::class);
 
         $group->post("measurements/{planId}/start", StartMeasurementAction::class);
