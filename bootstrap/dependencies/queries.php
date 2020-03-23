@@ -16,6 +16,8 @@ use App\Plans\Application\Find\IsPlanStartedQueryHandler;
 use App\Shared\Application\Calendar\GetActualTimeQuery;
 use App\Shared\Application\Calendar\GetActualTimeQueryHandler;
 use App\Plans\Application\Find\FindPlansByPeriodQueryHandler;
+use App\Plans\Application\Find\IsPlanOutdatedQuery;
+use App\Plans\Application\Find\IsPlanOutdatedQueryHandler;
 
 $container->set(
     FindUserByEmailQuery::class,
@@ -55,4 +57,9 @@ $container->set(
 $container->set(
     FindPlansByPeriodQuery::class,
     DI\autowire(FindPlansByPeriodQueryHandler::class),
+);
+
+$container->set(
+    IsPlanOutdatedQuery::class,
+    DI\autowire(IsPlanOutdatedQueryHandler::class),
 );
