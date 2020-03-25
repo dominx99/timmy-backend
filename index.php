@@ -5,6 +5,10 @@ use DI\Container;
 use Dotenv\Dotenv;
 use App\Shared\Http\Middleware\ExceptionMiddleware;
 use App\Shared\Http\Middleware\JsonBodyParserMiddleware;
+use Slim\Psr7\Request;
+use Psr\Http\Server\RequestHandlerInterface;
+use Slim\Psr7\Response;
+use Slim\Routing\RouteContext;
 
 require_once 'vendor/autoload.php';
 
@@ -20,9 +24,24 @@ require_once './bootstrap/dependencies.php';
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
-header("Access-Control-Allow-Origin:*");
-header("Content-Type: application/json");
-header("Access-Control-Allow-Headers: Content-Type");
+/* $app->addBodyParsingMiddleware(); */
+
+$app->add(function (Request $request, RequestHandlerInterface $handler): Response {
+    $routeContext = RouteContext::fromRequest($request);
+    $routingResults = $routeContext->getRoutingResults();
+    $methods = $routingResults->getAllowedMethods();
+    $requestHeaders = $request->getHeaderLine('Access-Control-Request-Headers');
+
+    $response = $handler->handle($request);
+
+    $response = $response->withHeader('Access-Control-Allow-Origin', '*');
+    $response = $response->withHeader('Access-Control-Allow-Methods', implode(',', $methods));
+    $response = $response->withHeader('Access-Control-Allow-Headers', $requestHeaders);
+
+    // $response = $response->withHeader('Access-Control-Allow-Credentials', 'true');
+
+    return $response;
+});
 
 $app->addRoutingMiddleware();
 $app->addMiddleware(new ExceptionMiddleware());
