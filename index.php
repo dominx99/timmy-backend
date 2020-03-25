@@ -20,6 +20,10 @@ require_once './bootstrap/dependencies.php';
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
+header("Access-Control-Allow-Origin:*");
+header("Content-Type: application/json");
+header("Access-Control-Allow-Headers: Content-Type");
+
 $app->addRoutingMiddleware();
 $app->addMiddleware(new ExceptionMiddleware());
 $app->addMiddleware(new JsonBodyParserMiddleware());
