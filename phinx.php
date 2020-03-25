@@ -2,9 +2,6 @@
 
 use Dotenv\Dotenv;
 
-$dotenv= Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-
 $config = [];
 
 if (getenv("APP_ENV") === "production") {
@@ -14,9 +11,12 @@ if (getenv("APP_ENV") === "production") {
         "host"     => $config['host'],
         "user"     => $config['user'],
         "password" => $config['pass'],
-        "dbname"   => substr($url["path"], 1),
+        "dbname"   => substr($config["path"], 1),
     ];
 } else {
+    $dotenv= Dotenv::createImmutable(__DIR__);
+    $dotenv->load();
+
     $config = [
         'host'     => getenv("DB_HOST"),
         'user'     => getenv("DB_USER"),
