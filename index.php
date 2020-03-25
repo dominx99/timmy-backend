@@ -38,7 +38,7 @@ $app->add(function (Request $request, RequestHandlerInterface $handler): Respons
     $response = $response->withHeader('Access-Control-Allow-Methods', implode(',', $methods));
     $response = $response->withHeader('Access-Control-Allow-Headers', $requestHeaders);
 
-    // $response = $response->withHeader('Access-Control-Allow-Credentials', 'true');
+    $response = $response->withHeader('Access-Control-Allow-Credentials', 'true');
 
     return $response;
 });
