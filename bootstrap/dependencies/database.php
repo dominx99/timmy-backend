@@ -12,7 +12,7 @@ if (getenv("APP_ENV") === "production") {
         "host"     => $config['host'],
         "user"     => $config['user'],
         "password" => $config['pass'],
-        "dbname"   => substr($url["path"], 1),
+        "dbname"   => substr($config["path"], 1),
     ];
 } else {
     $config = [
