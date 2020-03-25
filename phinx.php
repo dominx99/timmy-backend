@@ -5,6 +5,26 @@ use Dotenv\Dotenv;
 $dotenv= Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
+$config = [];
+
+if (getenv("APP_ENV") === "production") {
+    $config = parse_url(getenv("CLEARDB_DATABASE_URL"));
+
+    $config = [
+        "host"     => $config['host'],
+        "user"     => $config['user'],
+        "password" => $config['pass'],
+        "dbname"   => substr($url["path"], 1),
+    ];
+} else {
+    $config = [
+        'host'     => getenv("DB_HOST"),
+        'user'     => getenv("DB_USER"),
+        'password' => getenv("DB_PASSWORD"),
+        'dbname'   => getenv("DB_NAME"),
+    ];
+}
+
 return [
     'paths' => [
         'migrations' => 'db/migrations',
@@ -15,10 +35,10 @@ return [
         'default_database'        => "dev",
         "dev" => [
             'adapter'      => "mysql",
-            'host'         => getenv('DB_HOST'),
-            'name'         => getenv('DB_NAME'),
-            'user'         => getenv('DB_USER'),
-            'pass'         => getenv('DB_PASSWORD'),
+            'host'         => $config["host"],
+            'name'         => $config["dbname"],
+            'user'         => $config["user"],
+            'pass'         => $config["pass"],
             'port'         => getenv('DB_PORT'),
             'charset'      => getenv('DB_CHARSET'),
             'collation'    => getenv('DB_COLLATION'),
