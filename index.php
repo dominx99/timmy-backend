@@ -8,7 +8,7 @@ use App\Shared\Http\Middleware\JsonBodyParserMiddleware;
 
 require_once 'vendor/autoload.php';
 
-if (! getenv("APP_ENV") === "production") {
+if (getenv("APP_ENV") !== "production") {
     $dotenv = Dotenv::createImmutable(__DIR__);
     $dotenv->load();
 }
