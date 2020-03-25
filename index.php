@@ -6,10 +6,6 @@ use DI\Container;
 use Dotenv\Dotenv;
 use App\Shared\Http\Middleware\ExceptionMiddleware;
 use App\Shared\Http\Middleware\JsonBodyParserMiddleware;
-use Slim\Psr7\Request;
-use Psr\Http\Server\RequestHandlerInterface;
-use Slim\Psr7\Response;
-use Slim\Routing\RouteContext;
 
 require_once 'vendor/autoload.php';
 
@@ -25,7 +21,7 @@ require_once './bootstrap/dependencies.php';
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
-$app->addBodyParsingMiddleware();
+/* $app->addBodyParsingMiddleware(); */
 
 $app->addRoutingMiddleware();
 $app->addMiddleware(new ExceptionMiddleware());
