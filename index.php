@@ -24,7 +24,7 @@ require_once './bootstrap/dependencies.php';
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
-/* $app->addBodyParsingMiddleware(); */
+$app->addBodyParsingMiddleware();
 
 $app->add(function (Request $request, RequestHandlerInterface $handler): Response {
     $routeContext = RouteContext::fromRequest($request);
@@ -47,6 +47,10 @@ $app->addRoutingMiddleware();
 $app->addMiddleware(new ExceptionMiddleware());
 $app->addMiddleware(new JsonBodyParserMiddleware());
 $app->addErrorMiddleware(true, false, false);
+
+$app->options('/{routes:.+}', function ($request, $response, $args) {
+    return $response;
+});
 
 require_once './routes/api-v1.php';
 
