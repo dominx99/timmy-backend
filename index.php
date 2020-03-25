@@ -23,10 +23,10 @@ $app = AppFactory::create();
 
 /* $app->addBodyParsingMiddleware(); */
 
+$app->addMiddleware(new CORSMiddleware());
 $app->addRoutingMiddleware();
 $app->addMiddleware(new ExceptionMiddleware());
 $app->addMiddleware(new JsonBodyParserMiddleware());
-$app->addMiddleware(new CORSMiddleware());
 $app->addErrorMiddleware(true, false, false);
 
 $app->options('/{routes:.+}', function ($request, $response, $args) {
