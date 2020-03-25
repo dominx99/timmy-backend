@@ -38,7 +38,7 @@ return [
             'host'         => $config["host"],
             'name'         => $config["dbname"],
             'user'         => $config["user"],
-            'pass'         => $config["pass"],
+            'pass'         => $config["password"],
             'port'         => getenv('DB_PORT'),
             'charset'      => getenv('DB_CHARSET'),
             'collation'    => getenv('DB_COLLATION'),
