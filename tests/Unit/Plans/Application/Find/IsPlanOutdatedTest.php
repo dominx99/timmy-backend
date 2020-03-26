@@ -36,6 +36,7 @@ final class IsPlanOutdatedTest extends BaseTestCase
         $now = new DateTime("now");
         $calendar = $this->createMock(CalendarContract::class);
         $calendar->method("now")->willReturn($now);
+        $this->container->set(CalendarContract::class, $calendar);
 
         $this->queryBuilder
             ->expects($this->once())

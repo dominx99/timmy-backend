@@ -1,4 +1,5 @@
 /vendor/
+/logs/
 
 /.coverage/
 .php_cs.cache

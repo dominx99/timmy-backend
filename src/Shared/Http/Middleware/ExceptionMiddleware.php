@@ -2,15 +2,14 @@
 
 namespace App\Shared\Http\Middleware;
 
-use App\Accounts\Domain\UserNotFoundException;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use App\Shared\Exceptions\BusinessException;
-use App\Shared\Http\Responses\JsonResponse;
 use Fig\Http\Message\StatusCodeInterface;
 use App\Shared\Exceptions\ValidationException;
+use Slim\Psr7\Response;
 
 final class ExceptionMiddleware implements MiddlewareInterface
 {
@@ -21,16 +20,21 @@ final class ExceptionMiddleware implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        $response = new Response();
+        $response = $response->withHeader('Content-Type', 'application/json');
+
         try {
             $response = $handler->handle($request);
         } catch (BusinessException $e) {
-            return JsonResponse::create([
-                'error' => $e->getMessage(),
-            ], $e->getCode() ? $e->getCode() : StatusCodeInterface::STATUS_BAD_REQUEST);
+            $response->getBody()->write(json_encode(["error" => $e->getMessage()]));
+            $response = $response->withStatus(
+                $e->getCode() ? $e->getCode() : StatusCodeInterface::STATUS_BAD_REQUEST
+            );
         } catch (ValidationException $e) {
-            return JsonResponse::create([
-                'errors' => $e->messages(),
-            ], $e->getCode() ? $e->getCode() : StatusCodeInterface::STATUS_UNPROCESSABLE_ENTITY);
+            $response->getBody()->write(json_encode(["errors" => $e->messages()]));
+            $response = $response->withStatus(
+                $e->getCode() ? $e->getCode() : StatusCodeInterface::STATUS_UNPROCESSABLE_ENTITY
+            );
         }
 
         return $response;

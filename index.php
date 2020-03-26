@@ -23,9 +23,9 @@ $app = AppFactory::create();
 
 /* $app->addBodyParsingMiddleware(); */
 
+$app->addMiddleware(new ExceptionMiddleware());
 $app->addMiddleware(new CORSMiddleware());
 $app->addRoutingMiddleware();
-$app->addMiddleware(new ExceptionMiddleware());
 $app->addMiddleware(new JsonBodyParserMiddleware());
 $app->addErrorMiddleware(true, false, false);
 

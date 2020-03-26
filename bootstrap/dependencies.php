@@ -18,6 +18,7 @@ $container->set(QueryBusContract::class, DI\autowire(QueryBus::class));
 $container->set(AuthGuardResolverContract::class, DI\autowire(AuthGuardResolver::class));
 $container->set(CalendarContract::class, DI\autowire(Calendar::class));
 
+require 'dependencies/logger.php';
 require 'dependencies/database.php';
 require 'dependencies/commands.php';
 require 'dependencies/queries.php';
