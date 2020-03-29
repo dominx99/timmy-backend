@@ -8,14 +8,17 @@ use App\Shared\Exceptions\SystemException;
 use DI\Container;
 use DI\Definition\Exception\InvalidDefinition;
 use App\Shared\Contracts\CommandBusContract;
+use Psr\Log\LoggerInterface;
 
 final class CommandBus implements CommandBusContract
 {
     private Container $container;
+    private LoggerInterface $logger;
 
     public function __construct(Container $container)
     {
         $this->container = $container;
+        $this->logger    = $container->get(LoggerInterface::class);
     }
 
     public function handle(Command $command): void

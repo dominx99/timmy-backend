@@ -15,6 +15,7 @@ use App\Shared\Infrastructure\Bus\QueryBus;
 use App\Accounts\Application\Find\FindUserByEmailQuery;
 use App\Shared\Http\Middleware\ExceptionMiddleware;
 use App\Shared\Http\Middleware\JsonBodyParserMiddleware;
+use Psr\Log\LoggerInterface;
 
 class BaseTestCase extends TestCase
 {
@@ -60,15 +61,14 @@ class BaseTestCase extends TestCase
         $container = new Container();
 
         AppFactory::setContainer($container);
-
         $app = AppFactory::create();
+        $container = $app->getContainer();
+        require 'bootstrap/dependencies.php';
+
         $app->addRoutingMiddleware();
-        $app->addMiddleware(new ExceptionMiddleware());
+        $app->addMiddleware(new ExceptionMiddleware($container->get(LoggerInterface::class)));
         $app->addMiddleware(new JsonBodyParserMiddleware());
         $app->addErrorMiddleware(true, false, false);
-        $container = $app->getContainer();
-
-        require 'bootstrap/dependencies.php';
         require 'routes/api-v1.php';
 
         $this->app        = $app;

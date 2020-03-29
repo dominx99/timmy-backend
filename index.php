@@ -6,6 +6,7 @@ use DI\Container;
 use Dotenv\Dotenv;
 use App\Shared\Http\Middleware\ExceptionMiddleware;
 use App\Shared\Http\Middleware\JsonBodyParserMiddleware;
+use Psr\Log\LoggerInterface;
 
 require_once 'vendor/autoload.php';
 
@@ -23,7 +24,7 @@ $app = AppFactory::create();
 
 /* $app->addBodyParsingMiddleware(); */
 
-$app->addMiddleware(new ExceptionMiddleware());
+$app->addMiddleware(new ExceptionMiddleware($container->get(LoggerInterface::class)));
 $app->addMiddleware(new CORSMiddleware());
 $app->addRoutingMiddleware();
 $app->addMiddleware(new JsonBodyParserMiddleware());
