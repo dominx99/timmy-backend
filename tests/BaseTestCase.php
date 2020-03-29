@@ -5,7 +5,6 @@ namespace Tests;
 use App\Shared\Infrastructure\Bus\CommandBus;
 use Slim\Factory\AppFactory;
 use DI\Container;
-use Dotenv\Dotenv;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\App;
@@ -58,9 +57,6 @@ class BaseTestCase extends TestCase
 
     private function createApplication(): void
     {
-        $dotenv = Dotenv::createImmutable(__DIR__ . "/../");
-        $dotenv->load();
-
         $container = new Container();
 
         AppFactory::setContainer($container);
