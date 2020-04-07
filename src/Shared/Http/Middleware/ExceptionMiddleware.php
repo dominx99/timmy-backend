@@ -47,7 +47,7 @@ final class ExceptionMiddleware implements MiddlewareInterface
                 $e->getCode() ? $e->getCode() : StatusCodeInterface::STATUS_UNPROCESSABLE_ENTITY
             );
         } catch (Throwable $t) {
-            $this->logException($e);
+            $this->logException($t);
         }
 
         return $response;
