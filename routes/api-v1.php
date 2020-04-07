@@ -6,6 +6,7 @@ use App\Accounts\Http\Middleware\JWTAuthMiddleware;
 use App\Measurements\Http\Actions\FindMeasurementsByPlanAction;
 use App\Measurements\Http\Actions\StartMeasurementAction;
 use App\Measurements\Http\Actions\StopMeasurementAction;
+use App\Plans\Http\Actions\DeletePlanAction;
 use App\Plans\Http\Actions\FindPlansByDateAction;
 use App\TimeMeters\Http\Controllers\TimeMetersController;
 use Slim\Interfaces\RouteCollectorProxyInterface;
@@ -21,6 +22,7 @@ $app->group("/v1", function (RouteCollectorProxyInterface $group) {
         $group->get("time-meters", TimeMetersController::class . ':index');
         $group->post("time-meters", TimeMetersController::class . ':store');
         $group->post("plans", PlansController::class . ':store');
+        $group->delete("plans/{planId}", DeletePlanAction::class);
         $group->get("plans/by/date", FindPlansByDateAction::class);
         $group->get("plans/by/period", FindPlansByPeriodAction::class);
         $group->get("plans/{planId}/measurements", FindMeasurementsByPlanAction::class);

@@ -14,6 +14,8 @@ use App\Measurements\Application\Update\StopMeasurementCommand;
 use App\Measurements\Application\Update\StopMeasurementCommandHandler;
 use App\Plans\Application\Create\CreatePlanCommand;
 use App\Plans\Application\Create\CreatePlanCommandHandler;
+use App\Plans\Application\Delete\DeletePlanCommand;
+use App\Plans\Application\Delete\DeletePlanCommandHandler;
 
 $container->set(
     CreateTimeMeterCommand::class,
@@ -48,4 +50,9 @@ $container->set(
 $container->set(
     StopMeasurementCommand::class,
     DI\autowire(StopMeasurementCommandHandler::class),
+);
+
+$container->set(
+    DeletePlanCommand::class,
+    DI\autowire(DeletePlanCommandHandler::class),
 );

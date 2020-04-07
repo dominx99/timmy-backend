@@ -47,6 +47,7 @@ final class FindPlansByPeriodQueryHandler implements QueryHandler
                     $qb->expr()->lte("p.end_date", ":endDate"),
                 ),
             ))
+            ->orderBy("p.end_date")
             ->setParameters([
                 "userId"      => $query->userId(),
                 "startDate"   => $query->startDate(),

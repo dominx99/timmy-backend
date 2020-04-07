@@ -8,6 +8,7 @@ interface ErrorMessageInterface
     const PLAN_ALREADY_STARTED = "Plan already started.";
     const PLAN_IS_NOT_STARTED = "Plan is not started.";
     const PLAN_IS_OUTDATED = "Plan is outdated.";
+    const PLAN_DELETE_ERROR = "Could not delete plan.";
 
     const MEASUREMENTS_NOT_FOUND = "Could not fetch measurements.";
 }
